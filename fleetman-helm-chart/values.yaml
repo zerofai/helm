@@ -1,0 +1,7 @@
+webapp:
+ numOfWebRep: 4
+ webappangular: release0-5
+ fleetmanqueue: release1
+
+dockerRepoName:
+ richardchesterwood

@@ -1,0 +1,31 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  # minReadySeconds: 30
+  selector:
+    matchLabels:
+      app: webapp
+  replicas: {{ .Values.webapp.numOfWebRep }}
+  template: # template for the pods
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: {{ .Values.dockerRepoName }}/k8s-fleetman-webapp-angular:{{ .Values.webapp.webappangular }}
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: queue
+  labels:
+    app: queue
+spec:
+  containers:
+  - name: queue
+    image: {{ .Values.dockerRepoName | default "richardchesterwood" | lower}}/k8s-fleetman-queue:{{ .Values.webapp.fleetmanqueue }}
