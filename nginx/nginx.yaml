@@ -1,0 +1,24 @@
+apiVersion: v2
+name: nginx
+description: A Helm chart for deploying a single instance of Nginx
+version: 0.1.0
+appVersion: 1.21.1
+
+dependencies:
+  - name: nginx
+    version: "0.4.0"
+    repository: "https://charts.bitnami.com/bitnami"
+
+# Define the values for the Nginx chart
+values:
+  nginx:
+    replicaCount: 1
+    image:
+      repository: nginx
+      tag: "1.21.1"
+      pullPolicy: IfNotPresent
+    service:
+      type: ClusterIP
+      port: 80
+    ingress:
+      enabled: false
